@@ -9,6 +9,22 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 		<script src="main.js"></script>
+		<script>
+		    window.pAsyncInit = function() {
+		        PDK.init({
+		            appId: "4860573668490625517",
+		            cookie: true
+		        });
+		    };
+
+		    (function(d, s, id){
+		        var js, pjs = d.getElementsByTagName(s)[0];
+		        if (d.getElementById(id)) {return;}
+		        js = d.createElement(s); js.id = id;
+		        js.src = "//assets.pinterest.com/sdk/sdk.js";
+		        pjs.parentNode.insertBefore(js, pjs);
+		    }(document, 'script', 'pinterest-jssdk'));
+		</script>
 	</head>
 
 	<body ng-controller="AppCtrl as ctrl" class="container">
@@ -21,7 +37,11 @@
 			INSTAGRAM
 		</div>
 		<div ng-show="ctrl.activeTab === 2">
-			PINTEREST
+			<button ng-if="!ctrl.pinterest.accessToken" ng-click="ctrl.pinterest.login()">Login to Pinterest</button>
+			<div ng-if="ctrl.pinterest.accessToken">
+				<input type="file" fileread="ctrl.pinterest.image" />
+				<button ng-click="pinButtonClick()">Pin</button>
+			</div>
 		</div>
 	</body>
 </html>
