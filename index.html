@@ -29,12 +29,18 @@
 
 	<body ng-controller="AppCtrl as ctrl" class="container">
 		<h3>Posting app prototype</h3>
-		<ul class="nav nav-pills">
-			<li ng-class="ctrl.activeTab === 1 ? 'active' : ''"><a ng-click="openTab(1)">Instagram</a></li>
-			<li ng-class="ctrl.activeTab === 2 ? 'active' : ''"><a ng-click="openTab(2)">Pinterest</a></li>
+		<ul class="nav nav-tabs">
+			<li role="presentation" ng-class="ctrl.activeTab === 1 ? 'active' : ''" class="ctrl.activeTab === 1 ? 'active' : ''"><a ng-click="openTab(1)">Instagram</a></li>
+			<li role="presentation" ng-class="ctrl.activeTab === 2 ? 'active' : ''" class="ctrl.activeTab === 1 ? 'active' : ''"><a ng-click="openTab(2)">Pinterest</a></li>
 		</ul>
 		<div ng-show="ctrl.activeTab === 1">
-			INSTAGRAM
+			<div class="form-group" style="width:300px;padding:10px; background-color:lightblue;">
+				<input type="text" placeholder="Enter username" class="form-control" ng-model="ctrl.instagram.username" />
+				<input type="password" placeholder="Enter password" class="form-control" ng-model="ctrl.instagram.password" />
+				<input type="text" placeholder="Enter photo caption" class="form-control" ng-model="ctrl.instagram.caption" />
+				<input type="file" fileread="ctrl.instagram.image" />
+				<input type="button "class="btn btn-default" style="margin:30px;" ng-click="doPost()" value="Post!" />
+			</div>
 		</div>
 		<div ng-show="ctrl.activeTab === 2">
 			<button ng-if="!ctrl.pinterest.accessToken" ng-click="ctrl.pinterest.login()">Login to Pinterest</button>

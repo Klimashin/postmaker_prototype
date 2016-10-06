@@ -1,5 +1,29 @@
 angular.module('InstagramService', []).service('instagram', function() {
+	this.username = '';
+	this.password = '';
+	this.image = undefined;
+	this.caption = '';
 
+	this.doPost = function() {
+		  var username = this.username;
+			var password = this.password;
+			var image = this.image;
+			var caption = this.caption;
+
+		$.post('backend.php',{
+			username: username,
+			password: password,
+			filename: image,
+			caption: caption
+		}).done(function(data, statusText, xhr) {
+			if (xhr.status === 201) {
+				console.log('Success!');
+				this.image = null;
+			} else {
+				console.error(xhr.status + ' Failed to post image!');
+			}
+		}.bind(this));
+	}.bind(this);
 });
 
 angular.module('PinterestService', []).service('pinterest', function() {
@@ -61,6 +85,7 @@ var AppCtrl = function($scope, instagram, pinterest) {
 	this.instagram = instagram;
 	this.pinterest = pinterest;
 
+  this.$scope.doPost = instagram.doPost;
 	this.$scope.pinButtonClick = this.pinterest.pinFile;
 
 	this.$scope.openTab = function(tabNumber) {
