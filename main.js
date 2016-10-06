@@ -91,7 +91,7 @@ var AppCtrl = function($scope, instagram, pinterest) {
 	this.$scope.pinButtonClick = this.pinterest.pinFile;
 	this.$scope.pinterestLogin = function() {
 		this.pinterest.login(function() {
-			this.$scope.$apply();
+			this.$scope.$applyAsync();
 		}.bind(this));
 	}.bind(this);
 
