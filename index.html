@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div ng-show="ctrl.activeTab === 2">
-			<button ng-if="!ctrl.pinterest.accessToken" class="btn btn-primary" ng-click="ctrl.pinterest.login()">Login to Pinterest</button>
+			<button ng-if="!ctrl.pinterest.accessToken" class="btn btn-primary" ng-click="pinterestLogin()">Login to Pinterest</button>
 			<div ng-if="ctrl.pinterest.accessToken">
 				<input type="file" fileread="ctrl.pinterest.image" />
 				<button class="btn btn-primary" ng-click="pinButtonClick()">Pin</button>
