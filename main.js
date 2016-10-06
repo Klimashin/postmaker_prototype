@@ -32,7 +32,7 @@ angular.module('PinterestService', []).service('pinterest', function() {
 	this.image = undefined;
 	this.pinterestUser = undefined;
 
-	this.login = function() {
+	this.login = function(cb) {
 		PDK.login({scope: 'write_public,read_public'}, function() {
 			if (PDK.getSession()) {
 				console.log(PDK.getSession());
@@ -49,6 +49,8 @@ angular.module('PinterestService', []).service('pinterest', function() {
 				PDK.request('/v1/me/', function (response) {
 					if (response.data) this.pinterestUser = response.data;
 				}.bind(this));
+
+				cb();
 			} else {
 				console.log('Autorization failure')
 			}
@@ -85,8 +87,13 @@ var AppCtrl = function($scope, instagram, pinterest) {
 	this.instagram = instagram;
 	this.pinterest = pinterest;
 
-  this.$scope.doPost = instagram.doPost;
+    this.$scope.doPost = instagram.doPost;
 	this.$scope.pinButtonClick = this.pinterest.pinFile;
+	this.$scope.pinterestLogin = function() {
+		this.pinterest.login(function() {
+			this.$scope.$apply();
+		}.bind(this));
+	}.bind(this);
 
 	this.$scope.openTab = function(tabNumber) {
 		this.activeTab = tabNumber;
