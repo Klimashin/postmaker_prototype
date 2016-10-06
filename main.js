@@ -16,7 +16,7 @@ angular.module('InstagramService', []).service('instagram', function() {
 			filename: image,
 			caption: caption
 		}).done(function(data, statusText, xhr) {
-			if (xhr.status === 201) {
+			if (xhr.status === 200) {
 				console.log('Success!');
 				this.image = null;
 			} else {
